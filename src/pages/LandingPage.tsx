@@ -106,7 +106,7 @@ export default function LandingPage() {
             <a href="#contact"  className="hover:text-black transition-colors">Contact</a>
           </nav>
           <div className="flex items-center gap-5">
-            <a href="/login?demo=1" className="text-[11px] uppercase tracking-widest text-teal-dark hover:text-black font-semibold transition-colors">Live demo</a>
+            {/* Live demo link hidden. To show it again, restore: <a href="/login?demo=1">Live demo</a> */}
             <a href="/login"  className="text-[11px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Sign in</a>
             <a href="/signup" className="px-4 py-2 bg-black text-white text-[11px] uppercase tracking-widest font-semibold hover:bg-neutral-800 transition-colors">Get started</a>
           </div>
