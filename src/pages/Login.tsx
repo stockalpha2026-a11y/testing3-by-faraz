@@ -6,6 +6,8 @@ import { Spinner } from '../components/Loaders'
 
 // Mock demo credentials
 const DEMO = { email: 'demo@reviewradar.com', password: 'demo1234' }
+// Set to true to show the public demo again (banner + /login?demo=1 auto sign-in).
+const SHOW_DEMO = false
 
 // Client-side brute-force throttle. Real protection against automated
 // attacks (DDoS, scripted credential stuffing) has to live at the
@@ -29,7 +31,7 @@ export default function Login() {
 
   // /login?demo=1 (the “Live demo” button) signs straight into the demo account.
   useEffect(() => {
-    if (params.get('demo') !== '1') return
+    if (!SHOW_DEMO || params.get('demo') !== '1') return
     localSignIn(DEMO.email, DEMO.password).then(({ session }) => { if (session) navigate('/dashboard', { replace: true }) })
   }, [params, navigate])
 
@@ -107,7 +109,7 @@ export default function Login() {
           )}
 
           {/* Demo credentials banner */}
-          <div className="border border-teal/30 bg-teal/5 p-4 space-y-2">
+          {SHOW_DEMO && <div className="border border-teal/30 bg-teal/5 p-4 space-y-2">
             <p className="text-[11px] uppercase tracking-widest text-teal font-bold">Try the demo</p>
             <p className="text-xs text-neutral-500 font-light">Use these credentials to explore a fully populated dashboard:</p>
             <div className="font-mono text-xs text-neutral-700 space-y-0.5">
@@ -120,7 +122,7 @@ export default function Login() {
             >
               Fill automatically →
             </button>
-          </div>
+          </div>}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
